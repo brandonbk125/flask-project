@@ -71,6 +71,17 @@ def get_ingredients(drink: dict):
 
 @app.route("/")
 def home():
+
+    return render_template("home.html")
+
+
+@app.route("/ingredient/")
+def ingredient():
+    pass
+
+
+@app.route("/random")
+def random_cocktail():
     url = "http://www.thecocktaildb.com/api/json/v1/1/random.php"
 
     r = requests.get(url)
@@ -83,13 +94,8 @@ def home():
     print("AMOUNTS: ")
     print(cocktail.get_ingredient_amounts())
 
-    return render_template("home.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
+    return render_template("random.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
                            ingredients=cocktail.get_ingredients(), ingredient_amounts=cocktail.get_ingredient_amounts())
-
-
-@app.route("/ingredient/")
-def ingredient():
-    pass
 
 
 @app.route('/browse/<string:letter>')

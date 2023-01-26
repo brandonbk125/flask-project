@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!-- templates/random.html -->
 
+{% extends "base.html" %}
+
+{% block title %}Random Cocktail{% endblock %}
+
+{% block content %}
+<h2>
+    {{ name }}
+</h2>
+<body>
+        <img src="{{ thumburl }}" alt="{{ name }}">
+        <table>
+            {% for i in range(0, ingredients | length) %}
+                <tr>
+                    <td>{{ ingredients[i] }} </td>
+                    <td>{{ ingredient_amounts[i] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
 </body>
-</html>
+{% endblock %}
