@@ -95,10 +95,14 @@ def list_cocktails(letter: str):
     print(cocktail_dict.keys())
     drinks_dict = cocktail_dict["drinks"]
     print(drinks_dict[0])
+    drinks = []
     for drink in drinks_dict:
         print(drink.get("strDrink"))
+        print(drink.get("strDrinkThumb"))
+        drinks.append([drink.get("strDrink"), drink.get("strDrinkThumb")])
 
-    return render_template("cocktail.html", name="Drink")
+    print(drinks)
+    return render_template("cocktail.html", drinks=drinks)
 
 
 if __name__ == '__main__':

@@ -47,6 +47,20 @@ img{
   padding: 10px;
 }
 
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-colour: #ddd;
+    padding: 10px;
+}
+
+.grid-item {
+    background-color: #ddd;
+    border: 1px solid #000;
+    padding: 20px;
+    text-align: center;
+}
+
 /* Style the centre headings */
 .centre h2{
     font-size: 20px;

@@ -9,7 +9,15 @@
     Header
 </h2>
 <body>
-    Body
+    <div class="grid-container">
+        {% for i in range(0, drinks | length) %}
+        <div class="grid-item">
+            <img src="{{ drinks[i][1] }}" alt="{{ drinks[i][0] }}">
+            <h2>{{ drinks[i][0] }}</h2>
+        </div>
+
+        {% endfor %}
+    </div>
 
 </body>
 
