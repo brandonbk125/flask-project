@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width", inital-scale="1.0">
+    <link rel="stylesheet" href="static/styles/style.css">
+    <title>{% block title %}{% endblock %}</title>
+
+
+</head>
+<body>
+    <div class="topnav">
+        <a href = "home.html" style="width:30%">Home</a>
+        <a href = "#" style="width:30%">Random</a>
+        <a href = "#" style="width:30%">List</a>
+    </div>
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="centre">
+        <h2>
+            <a href="">A</a>
+             /
+            <a href="">B</a>
+             /
+        </h2>
+    </div>
+
+    <div class="footer">
+
+    </div>
+
+
+</body>
+</html>

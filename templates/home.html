@@ -1,0 +1,22 @@
+<!-- templates/home.html -->
+
+{% extends "base.html" %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block content %}
+<h2>
+    {{ name }}
+</h2>
+    <body>
+        <img src="{{ thumburl }}" alt="{{ name }}">
+        <table>
+            {% for i in range(0, ingredients | length) %}
+                <tr>
+                    <td>{{ ingredients[i] }} </td>
+                    <td>{{ ingredient_amounts[i] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
+{% endblock %}
