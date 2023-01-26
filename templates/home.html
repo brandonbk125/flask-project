@@ -8,7 +8,7 @@
 <h2>
     {{ name }}
 </h2>
-    <body>
+<body>
         <img src="{{ thumburl }}" alt="{{ name }}">
         <table>
             {% for i in range(0, ingredients | length) %}
@@ -18,5 +18,5 @@
                 </tr>
             {% endfor %}
         </table>
-    </body>
+</body>
 {% endblock %}

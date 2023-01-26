@@ -23,6 +23,7 @@ img{
 .topnav {
   overflow: hidden;
   background-color: #333;
+  margin-bottom: 20px;
 }
 
 /* Style the topnav links */
@@ -70,14 +71,14 @@ img{
 
 /* Style the centre */
 .centre {
-    text-align: centre;
+    text-align: center;
     padding-bottom: 10px;
 }
 
 /* Style the centre links */
 .centre a{
     color: #a78d9b;
-    align: centre;
+    align: center;
     -webkit-transition: color 300ms, background-color 300ms;
     -moz-transition: color 300ms, background-color 300ms;
     -o-transition:  color 300ms, background-color 300ms;
