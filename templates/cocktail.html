@@ -1,4 +1,4 @@
-<!-- templates/cocktail.html -->
+<!-- templates/cocktail_list.html -->
 
 {% extends "base.html" %}
 
@@ -6,19 +6,18 @@
 
 {% block content %}
 <h2>
-    Header
+    {{ name }}
 </h2>
-<body>
-    <div class="grid-container">
-        {% for i in range(0, drinks | length) %}
-        <div class="grid-item">
-            <img src="{{ drinks[i][1] }}" alt="{{ drinks[i][0] }}">
-            <h2>{{ drinks[i][0] }}</h2>
-        </div>
-
-        {% endfor %}
-    </div>
-
-</body>
+    <body>
+        <img src="{{ thumburl }}" alt="{{ name }}">
+        <table>
+            {% for i in range(0, ingredients | length) %}
+                <tr>
+                    <td>{{ ingredients[i] }} </td>
+                    <td>{{ ingredient_amounts[i] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </body>
 
 {% endblock %}

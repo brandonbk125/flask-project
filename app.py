@@ -45,20 +45,11 @@ class Cocktail:
 app = Flask(__name__)
 
 
-@app.route("/")
-def home():
-    url = "http://www.thecocktaildb.com/api/json/v1/1/random.php"
-
-    r = requests.get(url)
-    data = r.json()
-    drink = data["drinks"][0]
-
+# takes a dict of drink attributes and returns a cocktail object
+def get_ingredients(drink: dict):
     cocktail = Cocktail()
-
-    thumburl = drink.get("strDrinkThumb")
-    name = drink.get("strDrink")
-    print(drink)
-
+    cocktail.set_img_url(drink.get("strDrinkThumb"))
+    cocktail.set_name(drink.get("strDrink"))
     drink_filtered = {k: v for k, v in drink.items() if v is not None and not ''}
     print("------------------filter----------------")
     print(drink_filtered.keys())
@@ -73,13 +64,27 @@ def home():
     for i in range(len(ingredient_amounts.keys())):
         cocktail.set_ingredient_amount(list(ingredient_amounts.items())[i][1], i)
 
+    return cocktail
+
+
+
+
+@app.route("/")
+def home():
+    url = "http://www.thecocktaildb.com/api/json/v1/1/random.php"
+
+    r = requests.get(url)
+    data = r.json()
+    drink = data["drinks"][0]
+    cocktail = get_ingredients(drink)
+
     print("INGREDIENTS:")
     print(cocktail.get_ingredients())
     print("AMOUNTS: ")
     print(cocktail.get_ingredient_amounts())
 
-    return render_template("home.html", thumburl=thumburl, name=name, ingredients=cocktail.get_ingredients(),
-                           ingredient_amounts=cocktail.get_ingredient_amounts())
+    return render_template("home.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
+                           ingredients=cocktail.get_ingredients(), ingredient_amounts=cocktail.get_ingredient_amounts())
 
 
 @app.route("/ingredient/")
@@ -87,7 +92,7 @@ def ingredient():
     pass
 
 
-@app.route('/search/<string:letter>')
+@app.route('/browse/<string:letter>')
 def list_cocktails(letter: str):
     url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter
     r = requests.get(url)
@@ -102,7 +107,21 @@ def list_cocktails(letter: str):
         drinks.append([drink.get("strDrink"), drink.get("strDrinkThumb")])
 
     print(drinks)
-    return render_template("cocktail.html", drinks=drinks)
+    return render_template("cocktail_list.html", drinks=drinks)
+
+
+@app.route('/drink/<string:drink>')
+def cocktail(drink: str):
+    url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink
+    r = requests.get(url)
+    cocktail_dict = r.json()
+    print(cocktail_dict.keys())
+    drinks_dict = cocktail_dict["drinks"][0]
+    print(drinks_dict)
+    cocktail = get_ingredients(drinks_dict)
+
+    return render_template("cocktail.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
+                           ingredients=cocktail.get_ingredients(), ingredient_amounts=cocktail.get_ingredient_amounts())
 
 
 if __name__ == '__main__':
