@@ -89,7 +89,16 @@ def ingredient():
 
 @app.route('/search/<string:letter>')
 def list_cocktails(letter: str):
-    pass
+    url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter
+    r = requests.get(url)
+    cocktail_dict = r.json()
+    print(cocktail_dict.keys())
+    drinks_dict = cocktail_dict["drinks"]
+    print(drinks_dict[0])
+    for drink in drinks_dict:
+        print(drink.get("strDrink"))
+
+    return render_template("cocktail.html", name="Drink")
 
 
 if __name__ == '__main__':
