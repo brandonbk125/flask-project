@@ -143,7 +143,7 @@ def cocktail(drink: str):
     url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink
     r = requests.get(url)
     cocktail_dict = r.json()
-    print(cocktail_dict.keys())
+    # print(cocktail_dict.keys())
     drinks_dict = cocktail_dict["drinks"][0]
     print(drinks_dict)
     cocktail = get_cocktail(drinks_dict)
