@@ -4,12 +4,14 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/*  Style the body */
 body {
   margin: 10px;
   font-family: Arial, Helvetica, sans-serif;
 
 }
 
+/* Style images */
 img{
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -45,17 +47,20 @@ img{
   padding: 10px;
 }
 
+/* Style the centre headings */
 .centre h2{
     font-size: 20px;
     margin-top: 0;
     margin-bottom: 20px;
 }
 
+/* Style the centre */
 .centre {
     text-align: centre;
     padding-bottom: 10px;
 }
 
+/* Style the centre links */
 .centre a{
     color: #a78d9b;
     align: centre;
