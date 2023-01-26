@@ -4,6 +4,7 @@ import requests
 import os
 
 
+# Cocktail Class
 class Cocktail:
     def __init__(self):
         self._name = ""
@@ -45,14 +46,15 @@ class Cocktail:
 app = Flask(__name__)
 
 
-# takes a dict of drink attributes and returns a cocktail object
-def get_ingredients(drink: dict):
+# Takes a dict of drink attributes and returns a cocktail object
+def get_cocktail(drink: dict):
     cocktail = Cocktail()
     cocktail.set_img_url(drink.get("strDrinkThumb"))
     cocktail.set_name(drink.get("strDrink"))
+
+    # filtering out empty values from dictionary
     drink_filtered = {k: v for k, v in drink.items() if v is not None and not ''}
-    print("------------------filter----------------")
-    print(drink_filtered.keys())
+
     # key: value for k, value in drink.items() if Ingredient in key
     ingredients = {k: v for k, v in drink_filtered.items() if "Ingredient" in k}
     ingredient_amounts = {k: v for k, v in drink_filtered.items() if "Measure" in k}
@@ -67,6 +69,7 @@ def get_ingredients(drink: dict):
     return cocktail
 
 
+# Homepage of the website
 @app.route("/")
 def home():
 
@@ -78,6 +81,7 @@ def ingredient():
     pass
 
 
+# Displays a random cocktail from the API
 @app.route("/random")
 def random_cocktail():
     url = "http://www.thecocktaildb.com/api/json/v1/1/random.php"
@@ -85,38 +89,35 @@ def random_cocktail():
     r = requests.get(url)
     data = r.json()
     drink = data["drinks"][0]
-    cocktail = get_ingredients(drink)
-
-    print("INGREDIENTS:")
-    print(cocktail.get_ingredients())
-    print("AMOUNTS: ")
-    print(cocktail.get_ingredient_amounts())
+    cocktail = get_cocktail(drink)
 
     return render_template("random.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
                            ingredients=cocktail.get_ingredients(), ingredient_amounts=cocktail.get_ingredient_amounts())
 
 
+# Displays a list of cocktails beginning with a given letter
 @app.route('/browse/<string:letter>')
 def list_cocktails(letter: str):
 
     url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?f=" + letter
     r = requests.get(url)
     cocktail_dict = r.json()
-    print(cocktail_dict.keys())
+    # print(cocktail_dict.keys())
     drinks_dict = cocktail_dict["drinks"]
     if drinks_dict is None:
         return render_template("no_cocktail_found.html")
     else:
         drinks = []
         for drink in drinks_dict:
-            print(drink.get("strDrink"))
-            print(drink.get("strDrinkThumb"))
+            # print(drink.get("strDrink"))
+            # print(drink.get("strDrinkThumb"))
             drinks.append([drink.get("strDrink"), drink.get("strDrinkThumb")])
 
-        print(drinks)
+        # print(drinks)
         return render_template("cocktail_list.html", drinks=drinks)
 
 
+# Displays a cocktail based on user search (or tells them that nothing can be found)
 @app.route('/search', methods=["GET", "POST"])
 def search():
     searched = str(request.form.get("searched"))
@@ -124,18 +125,19 @@ def search():
     url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + searched
     r = requests.get(url)
     cocktail_dict = r.json()
-    print(cocktail_dict.keys())
+    # print(cocktail_dict.keys())
     if cocktail_dict["drinks"] is None:
         return render_template("no_cocktail_found.html")
     else:
         drinks_dict = cocktail_dict["drinks"][0]
-        cocktail = get_ingredients(drinks_dict)
+        cocktail = get_cocktail(drinks_dict)
 
         return render_template("cocktail.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
                                ingredients=cocktail.get_ingredients(),
                                ingredient_amounts=cocktail.get_ingredient_amounts())
 
 
+# Display a specific cocktail
 @app.route('/drink/<string:drink>')
 def cocktail(drink: str):
     url = "http://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + drink
@@ -144,7 +146,7 @@ def cocktail(drink: str):
     print(cocktail_dict.keys())
     drinks_dict = cocktail_dict["drinks"][0]
     print(drinks_dict)
-    cocktail = get_ingredients(drinks_dict)
+    cocktail = get_cocktail(drinks_dict)
 
     return render_template("cocktail.html", thumburl=cocktail.get_img_url(), name=cocktail.get_name(),
                            ingredients=cocktail.get_ingredients(),
