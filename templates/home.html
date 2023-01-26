@@ -6,10 +6,15 @@
 
 {% block content %}
 <h2>
-    Search:
+    Find a cocktail!
 </h2>
 <body>
-smile :)
+<form method="POST" action="{{ url_for('search') }}">
+
+    <input type="search" placeholder="Search.." aria-label="Search" name="searched">
+
+</form>
+
 
 </body>
 {% endblock %}
