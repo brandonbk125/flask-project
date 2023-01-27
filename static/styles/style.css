@@ -83,6 +83,11 @@ img{
     font-size: 2vw;
 }
 
+.grid-item:hover {
+    color: grey;
+    text-decoration-line: underline;
+}
+
 /* Style the centre headings */
 .centre h2{
     font-size: 20px;
