@@ -1,5 +1,10 @@
 ## Cocktail webapp using Flask
-Made using [Flask](https://flask.palletsprojects.com/en/2.2.x/)
+Made using [Flask](https://github.com/pallets/flask)
+
+<p align="center">
+<img alt="flask_logo" src="./docs/flask_logo.jpg" width="75%">
+</p>
+
 ```python
 from flask import Flask
 ```
