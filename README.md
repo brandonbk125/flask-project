@@ -16,5 +16,3 @@ Created using [TheCocktailDB](https://www.thecocktaildb.com/) API
 Deployed using [Pythonanywhere](https://www.pythonanywhere.com/):
 
  https://brandbk125.pythonanywhere.com/
-
-
