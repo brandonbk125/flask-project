@@ -5,16 +5,12 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-<h2>
+<h2 align="center">
     Find a cocktail!
 </h2>
 <body>
-<form method="POST" action="{{ url_for('search') }}">
-
-    <input type="search" placeholder="Search.." aria-label="Search" name="searched">
-
+<form method="POST" action="{{ url_for('search') }}" align="center">
+    <input class="search" type="search" placeholder="Search.." aria-label="Search" name="searched">
 </form>
-
-
 </body>
 {% endblock %}
