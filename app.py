@@ -74,11 +74,6 @@ def home():
     return render_template("home.html")
 
 
-@app.route("/ingredient/")
-def ingredient():
-    pass
-
-
 # Displays a random cocktail from the API
 @app.route("/random")
 def random_cocktail():
